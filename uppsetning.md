@@ -4,6 +4,10 @@ Fara eftir leiðbeiningunum [hér](https://rust-lang.org/tools/install/).
 
 Ef það gengur ekki, fylgið leiðbeiningum hér fyrir neðan.
 
+- [Windows](#windows)
+- [macOS](#macos)
+- [Ubuntu](#ubuntu)
+
 ## Windows
 
 Setja inn Ubuntu með WSL (Windows Subsystem for Linux) ef þarf, ætti að vera hjá flestum síðan í KEST1VL. (Leiðbeiningar [hér](https://github.com/gestskoli/KEST1VL/blob/master/WSL.md))
