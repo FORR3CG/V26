@@ -10,17 +10,17 @@ pub struct Hestur {
 }
 
 impl Hestur {
-    pub fn new(id: u32, nafn: &str, aldur: u8, stada: Stada) -> Self {
+    pub fn new(id: u32, nafn: &str, aldur: u8, stada: &str) -> Self {
         Self {
             id,
             nafn: nafn.to_string(),
             aldur,
-            stada,
+            stada: Stada::from(stada),
         }
     }
 
-    pub fn breyta_stodu(&mut self, stada: Stada) {
-        self.stada = stada
+    pub fn breyta_stodu(&mut self, stada: &str) {
+        self.stada = Stada::from(stada)
     }
 
     pub fn haekka_aldur(&mut self) {
