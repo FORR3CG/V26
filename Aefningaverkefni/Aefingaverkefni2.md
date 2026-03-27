@@ -21,7 +21,7 @@ fn main() {
     println!("{}", sleipnir);
     // id: 100, nafn: Gráni, aldur: 15, staða: Laus
 
-    sleipnir.breyta_stodu(Stada::Leigdur);
+    sleipnir.breyta_stodu("leigður");
     sleipnir.haekka_aldur();
     println!("{}", sleipnir);
     // id: 100, nafn: Gráni, aldur: 16, staða: Leigður    
