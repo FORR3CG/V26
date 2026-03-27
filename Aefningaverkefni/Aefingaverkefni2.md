@@ -17,14 +17,14 @@ use hestur::Hestur;
 use stada::Stada;
 
 fn main() {
-    let mut sleipnir = Hestur::new(100, "Gráni", 15, Stada::Laus);
+    let mut sleipnir = Hestur::new(100, "Sleipnir", 15, "laus");
     println!("{}", sleipnir);
-    // id: 100, nafn: Gráni, aldur: 15, staða: Laus
+    // id: 100, nafn: Sleipnir, aldur: 15, staða: Laus
 
     sleipnir.breyta_stodu("leigður");
     sleipnir.haekka_aldur();
     println!("{}", sleipnir);
-    // id: 100, nafn: Gráni, aldur: 16, staða: Leigður    
+    // id: 100, nafn: Sleipnir, aldur: 16, staða: Leigður    
 }
 ```
 
