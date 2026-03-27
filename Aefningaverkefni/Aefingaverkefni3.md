@@ -23,7 +23,7 @@ Gerðu forrit til að halda utan um herbergi í byggingu, herbergi geta verið *
     - prenta út heildar stærð (fm.) allra herbergja í byggingunni
     - útfæra Display
 
-Sjá útfærsludæmi í [bílasölunni](../Timar/bilasala_vec/).
+Sjá útfærsludæmi í [bílasölunni](../Tímar/bilasala_vec/).
 
 Dæmi um notkun:
 ```rust
