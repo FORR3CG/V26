@@ -3,6 +3,7 @@ use std::fmt::Display;
 use crate::bill::Bill;
 
 pub struct Bilasala {
+    // skilgreina breytuna bílarnir sem vector af Bíll
     bilarnir: Vec<Bill>,
 }
 
