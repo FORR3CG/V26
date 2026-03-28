@@ -107,7 +107,7 @@ fn fall(listi: &Vec<i32>) -> Vec<i32> {}
     1. Önnur útgáfan á að fá vektorinn lánaðan
     2. Hin á að taka eignarhald og skila því svo aftur
 
-[Dæmi um lausn](./lausnir/Aefingaverkefni_vec)
+[Dæmi um lausn](./lausnir/aefingaverkefni_vec/src/main.rs)
 
 
 
