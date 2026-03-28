@@ -90,7 +90,7 @@ fn fall(listi: &Vec<i32>) {}
 fn fall(listi: &mut Vec<i32>) {}
 
 // tekur eignarhald og skilar því svo til baka
-fn fall(listi: &Vec<i32>) -> Vec<i32> {}
+fn fall(listi: Vec<i32>) -> Vec<i32> {}
 ```
 
 Ýmis föll eru svo tengd Vec svipað og með lista í Python en við skoðum þau síðar.
