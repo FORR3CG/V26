@@ -1,0 +1,6 @@
+[package]
+name = "strengir_og_villur"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
