@@ -12,13 +12,13 @@ pub struct Bill {
 }
 
 impl Bill {          
-    pub fn new(tegund: &str, gerd: &str, litur: u32, verd: u32) -> Self {
-        Self {
+    pub fn new(tegund: &str, gerd: &str, litur: u32, verd: u32) -> Result<Self, String> {
+        Ok(Self {
             tegund: tegund.to_string(),
-            gerd: Gerd::from(gerd),
+            gerd: Gerd::try_from(gerd)?,
             litur: Litur::from(litur), // u32 => u8, u8, u8, u8
             verd,
-        }
+        })
     }
 
     pub fn verd(&self) -> u32 {

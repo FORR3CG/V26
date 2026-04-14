@@ -5,19 +5,31 @@ pub enum Gerd {
     Folksbill,
     Jeppi,
     Vorubill,
-    Annad,
 }
 
-impl From<&str> for Gerd {
+impl TryFrom<&str> for Gerd {
+    type Error = String;
+
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        match value.to_lowercase().as_str() { // fólksbill Fólksbíll FÓLKSBÍLL
+            "fb" | "fólksbíll" | "folksbill" => Ok(Gerd::Folksbill),
+            "j" | "jeppi" => Ok(Gerd::Jeppi),
+            "vb" | "vörubíll" => Ok(Gerd::Vorubill),
+            _ => Err(format!("Gerd: gat ekki búið til gerð úr {}", value)),
+        }
+    }
+}
+
+/* impl From<&str> for Gerd {
     fn from(value: &str) -> Self {
         match value.to_lowercase().as_str() { // fólksbill Fólksbíll FÓLKSBÍLL
             "fb" | "fólksbíll" | "folksbill" => Gerd::Folksbill,
             "j" | "jeppi" => Gerd::Jeppi,
             "vb" | "vörubíll" => Gerd::Vorubill,
-            _ => Gerd::Annad,
+            "snjóbíll" => 
         }
     }
-}
+} */
 
 // alveg eins og önnur Display, bara misjafnt hvað skrifast út eftir því hvað variant er valinn.
 impl Display for Gerd {
@@ -26,7 +38,6 @@ impl Display for Gerd {
             Gerd::Folksbill => write!(f, "Fólksbíll"),
             Gerd::Jeppi => write!(f, "Jeppi"),
             Gerd::Vorubill => write!(f, "Vörubíll"),
-            Gerd::Annad => write!(f, "Annað"),
         }
     }
 }

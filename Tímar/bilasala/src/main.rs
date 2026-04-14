@@ -25,7 +25,11 @@ fn main() {
         let l: usize = random_range(0..4);
         let v: usize = random_range(0..4);
         // push er eins og append á lista í python
-        bilar.push(Bill::new(tegundir[t], gerdir[g], litir[l], verd[v]));
+        if let Ok(bill) = Bill::new(tegundir[t], gerdir[g], litir[l], verd[v]) {
+            bilar.push(bill);
+        } else {
+            println!("Gat ekki búið til bíl!!!")
+        }
     }
 
     // verðum að hafa reference á bílar til að for-lykkjan taki ekki ownership
