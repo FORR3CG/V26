@@ -1,4 +1,4 @@
-# FORR3CG - Æfingaverkefni 4 - `struct`, `enum`, `Result` og `TryFrom`
+# FORR3CG - Æfingaverkefni 4 - `struct`, `enum`, `Vec`, `parse`, `Result` og `TryFrom`
 
 Bókasafn skólans vantar hugbúnað til að halda utan um safnkost sinn. Safnkostur er með auðkenni, titil, tegund og staðsetningu. Hafðu sér skrá fyrir hvert enum/struct.
 
@@ -14,8 +14,11 @@ Gerðu svo `struct` Safnkostur sem inniheldur id (`u32`), titill (`String`), teg
 - Útfærðu `TryFrom<&str>` (villuhlutinn String) fyrir Safnkost, gerðu ráð fyrir að tilillinn sé aðeins eitt orð.
     - Inntakið verður á forminu "id titill tegund staðsetning"
     - Dæmi um inntak "100 Python bók háteigsvegur"
-    - Notaðu `split_whitespace()` til að brjóta inntakið í einstaka orð.
-    - Notaðu `parse::<u32>()` til að breyta fyrsta orðinu í `u32`
+    - Notaðu `split_whitespace()` til að brjóta inntakið í einstaka orð og `collect::<Vec<&str>>()` til að setja í `Vec`.
+    - Ef inntakið inniheldur ekki nákvæmlega fjögur orð er ekki hægt að búa til safnkost.
+    - Notaðu `parse::<u32>()` til að breyta fyrsta orðinu í `u32`, skilaðu villu ef það er ekki hægt að breyta fyrsta orðinu í `u32`.
+    - Notaðu `?` virkjann allsstaðar þar sem það er hægt.
+    - Sjá dæmi um villumeldingar hér fyrir neðan.
 
 Dæmi um notkun:
 ```rust
@@ -44,6 +47,14 @@ fn main() {
     let c = Safnkostur::new(102, "HTML", "myndband", "hv");
     prenta_safnkost(c);
     // Gat ekki breytt 'myndband' í tegund!!
+    
+    let p = Safnkostur::try_from("123 Python bók");
+    prenta_safnkost(p);
+    // Ekki nægur fjöldi orða til að búa bók
+
+    let q = Safnkostur::try_from("abc Python bók sh");
+    prenta_safnkost(q);
+    // Gat ekki búið til id úr 'abc'
 
     let r = Safnkostur::try_from("101 Rust tímarit sh");
     prenta_safnkost(r);

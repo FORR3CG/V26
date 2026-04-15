@@ -23,6 +23,14 @@ fn main() {
     let c = Safnkostur::new(102, "HTML", "myndband", "hv");
     prenta_safnkost(c);
     // Gat ekki breytt 'myndband' í tegund!!
+    
+    let p = Safnkostur::try_from("123 Python bók");
+    prenta_safnkost(p);
+    // Ekki nægur fjöldi orða til að búa bók
+
+    let q = Safnkostur::try_from("abc Python bók sh");
+    prenta_safnkost(q);
+    // Gat ekki búið til id úr 'abc'
 
     let r = Safnkostur::try_from("101 Rust tímarit sh");
     prenta_safnkost(r);
