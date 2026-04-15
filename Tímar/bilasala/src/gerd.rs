@@ -25,8 +25,8 @@ impl TryFrom<&str> for Gerd {
         match value.to_lowercase().as_str() { // fólksbill Fólksbíll FÓLKSBÍLL
             "fb" | "fólksbíll" | "folksbill" => Gerd::Folksbill,
             "j" | "jeppi" => Gerd::Jeppi,
-            "vb" | "vörubíll" => Gerd::Vorubill,
-            "snjóbíll" => 
+            _ => Gerd::Vorubill,
+            //_ => todo!()
         }
     }
 } */

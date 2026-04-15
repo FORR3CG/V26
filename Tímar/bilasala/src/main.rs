@@ -8,6 +8,11 @@ use bill::Bill;
 use rand::random_range;
 
 fn main() {
+    //let b = Bill::try_from("Volvo fb 0xff00ff00 2000");
+    match Bill::try_from("Volvo fb 55000") {
+        Ok(bill) => println!("{}", bill),
+        Err(villa) => println!("{}", villa),
+    }
     //let b = Bill { tegund: "Volvo".to_string(), gerd: gerd::Gerd::Folksbill, litur: Litur(255, 0, 0, 255), verd: 5000};
     //let b = Bill::new("Volvo", Gerd::Folksbill, 0xff0000ff, 5000);
     let b = Bill::new("Volvo", "jeppi", 0xff0000ff, 5000);

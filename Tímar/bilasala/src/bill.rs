@@ -36,3 +36,30 @@ impl Display for Bill {
         write!(f, "tegund: {}, gerd: {}, litur: {}, verð: {} kr.", self.tegund, self.gerd, self.litur, self.verd)
     }
 }
+
+impl TryFrom<&str> for Bill {
+    type Error = String;
+
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        // "Volvo fb 65280 2000"
+        let ordin = value.split_whitespace().collect::<Vec<&str>>();
+        if ordin.len() != 4 {
+            return Err("Ekki nógu mörg orð til að búa til bíl!!!".to_string());
+        }
+        let tegund = ordin[0].to_string(); 
+        //let tegund = ordin.get(0); 
+        let gerd = Gerd::try_from(ordin[1])?;
+        let litur = Litur::try_from(ordin[2])?;
+        if let Ok(verd) = ordin[3].parse::<u32>() {
+            Ok(Self {
+                tegund,
+                gerd,
+                litur,
+                verd,
+            })
+        } else {
+            Err(format!("Gat ekki breytt '{}' í verð!!", ordin[3]))
+        }
+
+    }
+}

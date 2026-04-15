@@ -1,4 +1,4 @@
-use std::fmt::Display;
+use std::fmt::{Display, format};
 
 #[derive(Debug)]
 pub struct Litur(u8, u8, u8, u8);
@@ -10,6 +10,18 @@ impl From<u32> for Litur {
         let b = ((value >> 8) & 0xFF) as u8;
         let alpha = (value & 0xFF) as u8;
         Self(r, g, b, alpha)
+    }
+}
+
+impl TryFrom<&str> for Litur {
+    type Error = String;
+
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        // value = "65234"
+        match value.parse::<u32>() {
+            Ok(tala) => Ok(Litur::from(tala)),
+            Err(_) => return Err(format!("Litur: gat ekki breytt `{}` í tölu!!", value)),
+        }
     }
 }
 
