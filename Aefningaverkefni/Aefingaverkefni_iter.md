@@ -189,5 +189,5 @@ fn main() {
 Breyttu í `.iter().max_by_key(|o| o.len())`.
 
 ## Lausnir
-Dæmi um lausnir má finna [hér](./lausnir/aefingaverkefni_iter/lausnir.md).
+Dæmi um lausnir má finna [hér](./lausnir/Aefingaverkefni_iter/lausnir.md).
 
