@@ -13,6 +13,18 @@ impl From<u32> for Litur {
     }
 }
 
+impl TryFrom<&str> for Litur {
+    type Error = String;
+
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        // value = "65234"
+        match value.parse::<u32>() {
+            Ok(tala) => Ok(Litur::from(tala)),
+            Err(_) => Err(format!("Litur: gat ekki breytt `{}` í tölu!!", value)),
+        }
+    }
+}
+
 impl Display for Litur {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "r: {}, g: {}, b: {}, alpha: {}", self.0, self.1, self.2, self.3)

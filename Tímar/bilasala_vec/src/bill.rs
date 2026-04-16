@@ -10,19 +10,18 @@ pub struct Bill {
     tegund: String,
     gerd: Gerd,
     litur: Litur,
-    // bætt við set_verd falli í impl
     verd: u32,
 }
 
 impl Bill {          
-    pub fn new(id: u32, tegund: &str, gerd: &str, litur: u32, verd: u32) -> Self {
-        Self {
+    pub fn new(id: u32, tegund: &str, gerd: &str, litur: u32, verd: u32) -> Result<Self, String> {
+        Ok(Self {
             id,
             tegund: tegund.to_string(),
-            gerd: Gerd::from(gerd),
+            gerd: Gerd::try_from(gerd)?,
             litur: Litur::from(litur), // u32 => u8, u8, u8, u8
             verd,
-        }
+        })
     }
 
     pub fn id(&self) -> u32 {
@@ -42,5 +41,37 @@ impl Bill {
 impl Display for Bill {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "id: {}, tegund: {}, gerd: {}, litur: {}, verð: {} kr.", self.id, self.tegund, self.gerd, self.litur, self.verd)
+    }
+}
+
+impl TryFrom<&str> for Bill {
+    type Error = String;
+
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        // "Volvo fb 65280 2000"
+        let ordin = value.split_whitespace().collect::<Vec<&str>>();
+        if ordin.len() != 5 {
+            return Err("Ekki nógu mörg orð til að búa til bíl!!!".to_string());
+        }
+        let id = match ordin[0].parse::<u32>() {
+            Ok(tala) => tala,
+            Err(_) => return Err(format!("Gat ekki breytt '{}' í id!!", ordin[0])),
+        };
+        let tegund = ordin[0].to_string(); 
+        //let tegund = ordin.get(0); 
+        let gerd = Gerd::try_from(ordin[1])?;
+        let litur = Litur::try_from(ordin[2])?;
+        if let Ok(verd) = ordin[3].parse::<u32>() {
+            Ok(Self {
+                id,
+                tegund,
+                gerd,
+                litur,
+                verd,
+            })
+        } else {
+            Err(format!("Gat ekki breytt '{}' í verð!!", ordin[3]))
+        }
+
     }
 }
