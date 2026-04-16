@@ -1,4 +1,4 @@
-# FORR3CG - Æfingaverkefni 4 – breyta `for` lykkjum í `iter` - Lausnir
+# FORR3CG - Æfingaverkefni iter – breyta `for` lykkjum í `iter` - Lausnir
 
 ## Verkefni 1 
 **Lausn A – `sum()`**
