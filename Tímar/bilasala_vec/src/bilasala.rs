@@ -91,11 +91,15 @@ impl Bilasala {
 
     // Fall sem reiknar verðmæti allra bílanna
     pub fn verdmaeti(&self) -> u64 {
-        let mut verdmaeti = 0_u64;
+        self
+            .bilarnir
+            .iter()
+            .fold(0, |h_verd, bill| h_verd + bill.verd() as u64)
+/*         let mut verdmaeti = 0_u64;
         for bill in &self.bilarnir { // fáum reference á hvern bíl
             verdmaeti += bill.verd() as u64
         }
-        verdmaeti
+        verdmaeti */
     }
 }
 
@@ -104,7 +108,7 @@ impl Display for Bilasala {
         // eins og venjulegt Display fyrir utan að við getum bara kallað einu sinni
         // á write! þar sem það return-ar úr fallinu.
         // Þurfum því að búa til einn streng með öllum bílunum
-        let mut skilastrengur = String::from("");
+/*         let mut skilastrengur = String::from("");
         for bill in &self.bilarnir {
             // Display útfærir to_string() sjálkrafa en push_str fallið vill fá &str.
             // Bið breytum því strengnum úr String í &str með .as_str()
@@ -113,6 +117,14 @@ impl Display for Bilasala {
             skilastrengur.push('\n');
         }
         // bætum við trim() til að henda út síðasta \n
-        write!(f, "{}", skilastrengur.trim())
+        write!(f, "{}", skilastrengur.trim()) */
+        let strengurinn = self
+                                        .bilarnir
+                                        .iter()
+                                        .map(|bill| bill.to_string())
+                                        .collect::<Vec<String>>()
+                                        .join("\n");
+        // python: "\n".join(["abc", "def", "ghi"]) => "abc\ndef\nghi"
+        write!(f, "{}", strengurinn)
     }
 }
