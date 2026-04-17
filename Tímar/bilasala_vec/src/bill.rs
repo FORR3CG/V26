@@ -57,11 +57,11 @@ impl TryFrom<&str> for Bill {
             Ok(tala) => tala,
             Err(_) => return Err(format!("Gat ekki breytt '{}' í id!!", ordin[0])),
         };
-        let tegund = ordin[0].to_string(); 
+        let tegund = ordin[1].to_string(); 
         //let tegund = ordin.get(0); 
-        let gerd = Gerd::try_from(ordin[1])?;
-        let litur = Litur::try_from(ordin[2])?;
-        if let Ok(verd) = ordin[3].parse::<u32>() {
+        let gerd = Gerd::try_from(ordin[2])?;
+        let litur = Litur::try_from(ordin[3])?;
+        if let Ok(verd) = ordin[4].parse::<u32>() {
             Ok(Self {
                 id,
                 tegund,

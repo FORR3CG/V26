@@ -57,6 +57,8 @@ impl Bilasala {
                                              .iter_mut()
                                              .find(|b| b.id() == id) {
             bill.haekka_verd_um_prosent(prosent);
+            // endurröðum vektornum 
+            self.bilarnir.sort_by(|a, b| b.verd().cmp(&a.verd()));
             Ok(())
         } else {
             Err(format!("Fann engan bíl með id: {}", id))
