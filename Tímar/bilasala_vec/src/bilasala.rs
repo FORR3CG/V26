@@ -17,49 +17,76 @@ impl Bilasala {
 
     // Fallið tekur inn allar upplýsingar um einn bíl. Býr hann til og setur í vectorinn.
     // Verðum að fá &mut self, af því við erum að "breyta" vectornum (skrá eitthvað í hann)
-    pub fn skra_bil(&mut self, id: u32, tegund: &str, gerd: &str, litur: u32, verd: u32) {
-        let b = Bill::new(id, tegund, gerd, litur, verd);
+    pub fn skra_bil(&mut self, id: u32, tegund: &str, gerd: &str, litur: u32, verd: u32) -> Result<(), String> {
+        let b = Bill::new(id, tegund, gerd, litur, verd)?;
         self.bilarnir.push(b);
-        // má einnig gera svona:
-        // self.bilarnir.push(Bill::new(id, tegund, gerd, litur, verd));
+        //self.bilarnir.sort_by_key(|bill| bill.verd()); // hækkandi röð
+        self.bilarnir.sort_by(|a, b| b.verd().cmp(&a.verd())); // lækkandi röð
+        Ok(())
+    }
+
+    pub fn skra(&mut self, bilastrengur: &str) -> Result<(), String> {
+        // "101 Volvo fb 65234 2500"
+        self.bilarnir.push(Bill::try_from(bilastrengur)?);
+        self.bilarnir
+            .sort_by(|a, b| b.verd().cmp(&a.verd()));
+        Ok(())
     }
 
     // prentar út einn bíl eftir id, prentar viðeigandi meldingu ef enginn bíll
     // með það id finnst. Almennt viljum við ekki vera með print skipun í 
     // svona struct en við betrumbætum þetta þegar við erum búin að læra um Result
-    pub fn skoda_bil_med_id(&self, id: u32) {
-        for bill in &self.bilarnir {
+    pub fn skoda_bil_med_id(&self, id: u32) -> Option<String> {
+    if let Some(bill) = self.bilarnir.iter().find(|bill| bill.id() == id) {
+        Some(bill.to_string())
+    } else {
+        None
+    }
+        /* for bill in &self.bilarnir {
             if bill.id() == id {
-                println!("{}", bill);
-                // ef bið erum búin að finna bíl, hættum við í fallinu
-                return
+                return Some(bill.to_string())
             }
-        }
+        } */
         // Ef við komumst hingað höfum við ekki fundið bíl með id
-        println!("Fann engan bíl með id: {}", id)
+        
     }
 
-    pub fn haekka_um_prosent_verd_a_bil_med_id(&mut self, id: u32, prosent: u8) {
-        for bill in &mut self.bilarnir {
+    pub fn haekka_um_prosent_verd_a_bil_med_id(&mut self, id: u32, prosent: u8) -> Result<(), String> {
+        if let Some(bill) = self
+                                             .bilarnir
+                                             .iter_mut()
+                                             .find(|b| b.id() == id) {
+            bill.haekka_verd_um_prosent(prosent);
+            Ok(())
+        } else {
+            Err(format!("Fann engan bíl með id: {}", id))
+        }
+        /*         for bill in &mut self.bilarnir {
             if bill.id() == id {
                 bill.haekka_verd_um_prosent(prosent);
                 println!("Hækkaði verð á bíl með id: {} um {}%", id, prosent);
                 return
             }
         }
-        println!("Fann engan bíl með id: {}", id)
+        println!("Fann engan bíl með id: {}", id) */
     }
 
-    pub fn eyda_bil_med_id(&mut self, id: u32) {
+    pub fn eyda_bil_med_id(&mut self, id: u32) -> Result<(), String> {
         // þurfum að finna index-inn á bílnum sem á að eyða
-        for idx in 0..(self.bilarnir.len()) {
+        if let Some(idx) = self.bilarnir.iter().position(|bill| bill.id() == id) {
+            self.bilarnir.remove(idx);
+            Ok(())
+        } else {
+            Err(format!("Fann engan bíl með id {}", id))
+        }
+/*         for idx in 0..(self.bilarnir.len()) {
             if self.bilarnir[idx].id() == id {
                 self.bilarnir.remove(idx);
                 println!("Eyddi bíl með id: {}", id);
                 return
             }
         }
-        println!("Fann engan bíl með id: {}", id)
+        println!("Fann engan bíl með id: {}", id) */
     }
 
     // Fall sem reiknar verðmæti allra bílanna
