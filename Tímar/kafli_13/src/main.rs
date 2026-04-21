@@ -72,5 +72,16 @@ fn main() {
                         .fold(10000_f64, |summa: f64, stak| summa / *stak as f64);
     let nyr_listi = listi.iter().filter(|stak| **stak < 10).collect::<Vec<&i32>>();
     println!("{:?}", nyr_listi);
+
+    let v = vec![1,2,3,4,5];
+    let k = v
+                    .iter()
+                    .filter(|stak| **stak > 3)
+                    .fold(0, |summa, stak| summa + stak); 
+    let k: i32 = v.iter().filter(|stak: &&i32| **stak > 2).sum();
+    let k_ref = &k;
+    let k_ref_ref = &k_ref;
+    println!("{}", k);   
+
 }
-https://github.com/FORR3CG/V26/blob/main/Aefningaverkefni/lausnir/aefingaverkefni_iter/lausnir.md
+//https://github.com/FORR3CG/V26/blob/main/Aefningaverkefni/lausnir/aefingaverkefni_iter/lausnir.md
