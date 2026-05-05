@@ -1,18 +1,17 @@
-
 use std::fmt::Display;
 
 use crate::dyr::Dyr;
 use crate::hundur::Hundur;
 use crate::kottur::Kottur;
 
-struct Dyragardur {
+pub struct Dyragardur {
     dyrin: Vec<Dyr>,
     id: u32,
 }
 
 impl Dyragardur {
     pub fn new(id: Option<u32>) -> Self {
-    /*  let id = match id {
+        /*  let id = match id {
             Some(tala) => tala,
             None => 1000,
         }; */
@@ -35,21 +34,36 @@ impl Dyragardur {
 
     pub fn skra_kott(&mut self, kottur: &str) -> Result<(), String> {
         let id = self.next_id();
-        Ok(
-            self.dyrin.push(
-                Dyr::Kotturinn(
-                    Kottur::try_from((id, kottur))?
-                )
-            )
-        )
+        Ok(self
+            .dyrin
+            .push(Dyr::Kotturinn(Kottur::try_from((id, kottur))?)))
+    }
+
+    pub fn medaleinkunn_hunda(&mut self) -> Option<f32> {
+        let mut fjoldi_hunda = 0;
+        let heildareinkunn = self.dyrin.iter().fold(0_f32, |summa, dyr| {
+            if let Some(hundur) = dyr.hundur() {
+                fjoldi_hunda += 1;
+                summa + hundur.einkunn() as f32
+            } else {
+                summa + 0_f32
+            }
+        });
+        if fjoldi_hunda > 0 {
+            Some(heildareinkunn / fjoldi_hunda as f32)
+        } else {
+            None
+        }
     }
 }
 
 impl Display for Dyragardur {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
-            f, "{}",
-            self.dyrin.iter()
+            f,
+            "{}",
+            self.dyrin
+                .iter()
                 .map(|dyr| dyr.to_string())
                 .collect::<Vec<String>>()
                 .join("\n")

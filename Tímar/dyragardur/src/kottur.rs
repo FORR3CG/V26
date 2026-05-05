@@ -38,7 +38,7 @@ impl Kottur {
 
 impl Display for Kottur {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Hundur, {}, aldur {}", self.grunnur, self.aldur)
+        write!(f, "Köttur, {}, aldur {}", self.grunnur, self.aldur)
     }
 }
 
@@ -48,16 +48,17 @@ impl TryFrom<(u32, &str)> for Kottur {
     fn try_from(value: (u32, &str)) -> Result<Self, Self::Error> {
         let lidir = value.1.split_whitespace().collect::<Vec<&str>>();
         if lidir.len() != 2 {
-            Err(format!("Köttur villa: '{}' inniheldur ekki réttan fjölda orða til að búa til kött!",value.1))
+            Err(format!(
+                "Köttur villa: '{}' inniheldur ekki réttan fjölda orða til að búa til kött!",
+                value.1
+            ))
         } else {
             let grunnur = Dyragrunnur::from((value.0, lidir[0]));
             let aldur = match lidir[1].parse::<u8>() {
                 Ok(tala) => tala,
-                Err(_) => return Err(format!("Gat ekki gert einkunn úr '{}'", lidir[1]))
+                Err(_) => return Err(format!("Gat ekki gert einkunn úr '{}'", lidir[1])),
             };
-            Ok(Self {
-                grunnur, aldur
-            })
+            Ok(Self { grunnur, aldur })
         }
     }
 }

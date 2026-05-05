@@ -2,7 +2,6 @@ use std::fmt::Display;
 
 use crate::dyragrunnur::Dyragrunnur;
 
-
 pub struct Hundur {
     grunnur: Dyragrunnur,
     einkunn: u32,
@@ -10,10 +9,7 @@ pub struct Hundur {
 
 impl Hundur {
     pub fn new(grunnur: Dyragrunnur, einkunn: u32) -> Self {
-        Self {
-            grunnur,
-            einkunn
-        }
+        Self { grunnur, einkunn }
     }
 
     pub fn id(&self) -> u32 {
@@ -50,19 +46,22 @@ impl TryFrom<(u32, &str)> for Hundur {
         // (78, "Snati 270")
         let lidir = value.1.split_whitespace().collect::<Vec<&str>>();
         if lidir.len() != 2 {
-            Err(format!
-                ("Hundur villa, ekki réttur fjöldi orða í '{}' til að gera hund", value.1))
+            Err(format!(
+                "Hundur villa, ekki réttur fjöldi orða í '{}' til að gera hund",
+                value.1
+            ))
         } else {
             let grunnur = Dyragrunnur::from((value.0, lidir[0]));
             let einkunn = match lidir[1].parse::<u32>() {
                 Ok(tala) => tala,
-                Err(_) => return 
-                    Err(format!("Hundur villa, gat ekki breytt '{}' í einkunn", lidir[1])),
+                Err(_) => {
+                    return Err(format!(
+                        "Hundur villa, gat ekki breytt '{}' í einkunn",
+                        lidir[1]
+                    ));
+                }
             };
-            Ok(Self {
-                grunnur,
-                einkunn,
-            })
+            Ok(Self { grunnur, einkunn })
         }
     }
 }
