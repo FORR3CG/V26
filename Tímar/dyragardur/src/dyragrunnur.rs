@@ -1,5 +1,7 @@
 use std::fmt::Display;
+use serde::{Deserialize, Serialize};
 
+#[derive(Serialize, Deserialize)]
 pub struct Dyragrunnur {
     id: u32,
     nafn: String,

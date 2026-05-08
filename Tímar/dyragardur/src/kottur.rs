@@ -1,7 +1,9 @@
 use std::fmt::Display;
+use serde::{Deserialize, Serialize};
 
 use crate::dyragrunnur::Dyragrunnur;
 
+#[derive(Serialize, Deserialize)]
 pub struct Kottur {
     grunnur: Dyragrunnur,
     aldur: u8,

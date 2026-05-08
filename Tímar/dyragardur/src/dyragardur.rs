@@ -1,9 +1,12 @@
 use std::fmt::Display;
 
+use serde::{Deserialize, Serialize};
+
 use crate::dyr::Dyr;
 use crate::hundur::Hundur;
 use crate::kottur::Kottur;
 
+#[derive(Serialize, Deserialize)]
 pub struct Dyragardur {
     dyrin: Vec<Dyr>,
     id: u32,

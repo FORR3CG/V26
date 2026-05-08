@@ -1,8 +1,10 @@
 use std::fmt::Display;
+use serde::{Deserialize, Serialize};
 
 use crate::hundur::{self, Hundur};
 use crate::kottur::Kottur;
 
+#[derive(Serialize, Deserialize)]
 pub enum Dyr {
     // variant(struct)
     Hundurinn(Hundur),

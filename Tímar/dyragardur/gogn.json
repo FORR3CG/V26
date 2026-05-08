@@ -1,0 +1,86 @@
+{
+  "dyrin": [
+    {
+      "Kotturinn": {
+        "grunnur": {
+          "id": 1008,
+          "nafn": "Fluffy"
+        },
+        "aldur": 10
+      }
+    },
+    {
+      "Kotturinn": {
+        "grunnur": {
+          "id": 1009,
+          "nafn": "Greta"
+        },
+        "aldur": 6
+      }
+    },
+    {
+      "Kotturinn": {
+        "grunnur": {
+          "id": 1006,
+          "nafn": "Grettir"
+        },
+        "aldur": 15
+      }
+    },
+    {
+      "Hundurinn": {
+        "grunnur": {
+          "id": 1004,
+          "nafn": "Lilla"
+        },
+        "einkunn": 100
+      }
+    },
+    {
+      "Hundurinn": {
+        "grunnur": {
+          "id": 1003,
+          "nafn": "Lotta"
+        },
+        "einkunn": 2000
+      }
+    },
+    {
+      "Kotturinn": {
+        "grunnur": {
+          "id": 1007,
+          "nafn": "Lzdy"
+        },
+        "aldur": 13
+      }
+    },
+    {
+      "Hundurinn": {
+        "grunnur": {
+          "id": 1002,
+          "nafn": "Lína"
+        },
+        "einkunn": 1000
+      }
+    },
+    {
+      "Hundurinn": {
+        "grunnur": {
+          "id": 1001,
+          "nafn": "Snati"
+        },
+        "einkunn": 1000
+      }
+    },
+    {
+      "Hundurinn": {
+        "grunnur": {
+          "id": 1005,
+          "nafn": "Snotra"
+        },
+        "einkunn": 1000
+      }
+    }
+  ],
+  "id": 1009
+}
