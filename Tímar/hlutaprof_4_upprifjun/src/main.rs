@@ -10,9 +10,9 @@ fn main() {
     // heiltölur: i og u 8, 16, 32, 64 og 128, size
     // float (kommutölur): f32 og f64
                         //   0 1 2 3 4
-    let fylki: [usize; 5] = [1,2,3,4,5];
+    let fylki: [usize; 6] = [1,2,3,4,5,99];
     let idx = fylki[2]; // idx er 3
-    println!("{}", fylki[idx]); // fylki[fylki[2]]
+    println!("{}", fylki[fylki[2]]); // fylki[fylki[2]]
     let k: isize = 45;
     // print! vs println!
 
@@ -53,7 +53,7 @@ fn main() {
         k -= 1;
     }
     
-    // loop => while true
+    // loop => while true *
     let mut k = 5;
     loop {
         println!("abc");
