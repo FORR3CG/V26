@@ -1,4 +1,6 @@
-fn deila(a: i32, b: i32) -> Result<f32, String> {
+// * - gott að skoða vel
+
+fn deila(a: i32, b: i32) -> Result<f32, String> { // *
     if b != 0 {
         Ok(a as f32 / b as f32)
     } else {
@@ -10,9 +12,9 @@ fn main() {
     // heiltölur: i og u 8, 16, 32, 64 og 128, size
     // float (kommutölur): f32 og f64
                         //   0 1 2 3 4
-    let fylki: [usize; 6] = [1,2,3,4,5,99];
+    let fylki: [usize; 6] = [1,2,3,4,5,99]; // *
     let idx = fylki[2]; // idx er 3
-    println!("{}", fylki[fylki[2]]); // fylki[fylki[2]]
+    println!("{}", fylki[fylki[2]]); // fylki[fylki[2]] *
     let k: isize = 45;
     // print! vs println!
 
@@ -83,7 +85,7 @@ fn main() {
     let s_s = "abc"; // stack
     let mut s = String::from("abc"); //heap
     s.push_str("g");
-    let mut b = Box::new(5); // heap
+    let mut b = Box::new(5); // heap *
     *b += 10;
 
     // trait - skilgeinir sameiginlega hegðun
@@ -97,7 +99,7 @@ struct Hundur {
     nafn: String,
 }
 
-impl Ord for Hundur {
+impl Ord for Hundur { // *
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         // fyrst að bera saman nafn og ef það er eins að þá bera saman aldur
         self.nafn.cmp(&other.nafn)
